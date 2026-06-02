@@ -6,8 +6,10 @@ COPY daemons /etc/frr/daemons
 COPY frr.conf /etc/frr/frr.conf
 COPY start.sh /usr/local/bin/start-router
 
-RUN chown frr:frr /etc/frr/daemons /etc/frr/frr.conf \
-    && chmod 640 /etc/frr/daemons /etc/frr/frr.conf \
+RUN touch /etc/frr/vtysh.conf \
+    && chown frr:frr /etc/frr/daemons /etc/frr/frr.conf \
+    && chown frr:frrvty /etc/frr/vtysh.conf \
+    && chmod 640 /etc/frr/daemons /etc/frr/frr.conf /etc/frr/vtysh.conf \
     && chmod +x /usr/local/bin/start-router
 
 # Start FRR, then keep an interactive shell for the GNS3 console.
