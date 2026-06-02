@@ -6,4 +6,4 @@ RUN apk add --no-cache \
     tcpdump \
     busybox-extras
 
-CMD ["tail", "-f", "/dev/null"]
+CMD ["/bin/sh", "-i"]

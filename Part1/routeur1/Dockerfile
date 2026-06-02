@@ -4,9 +4,11 @@ FROM quay.io/frrouting/frr:10.4.1
 # base system. We only copy the daemon list and the shared FRR configuration.
 COPY daemons /etc/frr/daemons
 COPY frr.conf /etc/frr/frr.conf
+COPY start.sh /usr/local/bin/start-router
 
 RUN chown frr:frr /etc/frr/daemons /etc/frr/frr.conf \
-    && chmod 640 /etc/frr/daemons /etc/frr/frr.conf
+    && chmod 640 /etc/frr/daemons /etc/frr/frr.conf \
+    && chmod +x /usr/local/bin/start-router
 
-# Start FRR normally so zebra, bgpd, ospfd and isisd are actually launched.
-CMD ["/usr/lib/frr/docker-start"]
+# Start FRR, then keep an interactive shell for the GNS3 console.
+CMD ["/usr/local/bin/start-router"]
