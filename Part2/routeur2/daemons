@@ -1,0 +1,43 @@
+# FRR daemons for Part 2.
+# VXLAN is managed entirely by the Linux kernel (iproute2), not FRR.
+# Only zebra is required here: it manages the kernel routing table and
+# allows `vtysh` to inspect interface/route state for debugging.
+
+zebra=yes
+
+bgpd=no
+ospfd=no
+ospf6d=no
+isisd=no
+ripd=no
+ripngd=no
+pimd=no
+ldpd=no
+nhrpd=no
+eigrpd=no
+babeld=no
+sharpd=no
+staticd=no
+pbrd=no
+bfdd=no
+fabricd=no
+
+vtysh_enable=yes
+
+zebra_options=" -s 90000000 --daemon -A 127.0.0.1"
+bgpd_options="   --daemon -A 127.0.0.1"
+ospfd_options="  --daemon -A 127.0.0.1"
+ospf6d_options=" --daemon -A ::1"
+isisd_options="  --daemon -A 127.0.0.1"
+ripd_options="   --daemon -A 127.0.0.1"
+ripngd_options=" --daemon -A ::1"
+pimd_options="   --daemon -A 127.0.0.1"
+ldpd_options="   --daemon -A 127.0.0.1"
+nhrpd_options="  --daemon -A 127.0.0.1"
+eigrpd_options=" --daemon -A 127.0.0.1"
+babeld_options=" --daemon -A 127.0.0.1"
+sharpd_options=" --daemon -A 127.0.0.1"
+staticd_options="--daemon -A 127.0.0.1"
+pbrd_options="   --daemon -A 127.0.0.1"
+bfdd_options="   --daemon -A 127.0.0.1"
+fabricd_options="--daemon -A 127.0.0.1"
