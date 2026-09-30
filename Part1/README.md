@@ -11,7 +11,7 @@ the image also installs common network tools: `ip`, `ping`, `telnet` and
 Build it with:
 
 ```sh
-docker build -t hduflos-host Part1/host1
+docker build -t host_hduflos Part1/host1
 ```
 
 ## Router image
@@ -33,8 +33,8 @@ be reused by all GNS3 routers throughout the project.
 Build it with:
 
 ```sh
-docker build -t hduflos-router Part1/routeur1
+docker build -t router_huduflos Part1/routeur1
 ```
 
 In GNS3, create one template from each image. The equipment names should include
-the login, for example `hduflos-host1` and `hduflos-routeur1`.
+the login, for example `host_hduflos-1` and `routeur_hduflos-1`.

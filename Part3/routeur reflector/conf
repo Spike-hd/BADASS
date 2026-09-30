@@ -1,0 +1,38 @@
+vtysh
+configure terminal
+ interface lo
+   ip address 9.9.9.9/32
+ interface eth1
+   ip address 10.0.10.2/24
+   no shutdown
+ interface eth2
+   ip address 10.0.20.2/24
+   no shutdown
+ interface eth3
+   ip address 10.0.30.2/24
+   no shutdown
+ router ospf
+  network 10.0.10.0/24 area 0
+  network 10.0.20.0/24 area 0
+  network 10.0.30.0/24 area 0
+  network 9.9.9.9/32 area 0
+
+
+router bgp 65000
+ bgp router-id 9.9.9.9
+ no bgp default ipv4-unicast
+ neighbor 1.1.1.1 remote-as 65000
+ neighbor 1.1.1.1 update-source lo
+ neighbor 2.2.2.2 remote-as 65000
+ neighbor 2.2.2.2 update-source lo
+ neighbor 3.3.3.3 remote-as 65000
+ neighbor 3.3.3.3 update-source lo
+ address-family l2vpn evpn
+  neighbor 1.1.1.1 activate
+  neighbor 1.1.1.1 route-reflector-client
+  neighbor 2.2.2.2 activate
+  neighbor 2.2.2.2 route-reflector-client
+  neighbor 3.3.3.3 activate
+  neighbor 3.3.3.3 route-reflector-client
+ exit-address-family
+end

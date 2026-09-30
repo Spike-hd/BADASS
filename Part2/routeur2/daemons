@@ -1,14 +1,20 @@
-# FRR daemons for Part 2.
-# VXLAN is managed entirely by the Linux kernel (iproute2), not FRR.
-# Only zebra is required here: it manages the kernel routing table and
-# allows `vtysh` to inspect interface/route state for debugging.
+# This file tells FRR which routing daemons must be started.
+# Only the daemons required by the subject are enabled.
 
+# Zebra manages the Linux routing table and interfaces.
 zebra=yes
 
-bgpd=no
-ospfd=no
+# BGP daemon, required for BGP and later EVPN.
+bgpd=yes
+
+# OSPF daemon, required by the subject.
+ospfd=yes
+
+# IS-IS daemon, required by the subject.
+isisd=yes
+
+# Other FRR daemons are not required for Part 1.
 ospf6d=no
-isisd=no
 ripd=no
 ripngd=no
 pimd=no
@@ -22,13 +28,19 @@ pbrd=no
 bfdd=no
 fabricd=no
 
+# Enable integrated configuration loading through vtysh.
 vtysh_enable=yes
 
+# Daemon options.
+# --daemon means the daemon runs in background.
+# -A 127.0.0.1 means the daemon only accepts local vty connections.
+# Only local commands inside the container can control the daemon.
 zebra_options=" -s 90000000 --daemon -A 127.0.0.1"
 bgpd_options="   --daemon -A 127.0.0.1"
 ospfd_options="  --daemon -A 127.0.0.1"
-ospf6d_options=" --daemon -A ::1"
 isisd_options="  --daemon -A 127.0.0.1"
+
+ospf6d_options=" --daemon -A ::1"
 ripd_options="   --daemon -A 127.0.0.1"
 ripngd_options=" --daemon -A ::1"
 pimd_options="   --daemon -A 127.0.0.1"
@@ -41,3 +53,8 @@ staticd_options="--daemon -A 127.0.0.1"
 pbrd_options="   --daemon -A 127.0.0.1"
 bfdd_options="   --daemon -A 127.0.0.1"
 fabricd_options="--daemon -A 127.0.0.1"
+
+# Optional limits and debugging options.
+# Keep them commented unless needed.
+#MAX_FDS=1024
+#watchfrr_options=""

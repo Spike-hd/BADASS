@@ -1,7 +1,7 @@
 FROM quay.io/frrouting/frr:10.4.1
 
-# The FRR image already provides the routing stack and a busybox-compatible
-# base system. We only copy the daemon list and the shared FRR configuration.
+# The FRR image already provides the routing stack and a busybox-compatible base system.
+# We only copy the daemon list and the shared FRR configuration.
 COPY daemons /etc/frr/daemons
 COPY frr.conf /etc/frr/frr.conf
 COPY start.sh /usr/local/bin/start-router

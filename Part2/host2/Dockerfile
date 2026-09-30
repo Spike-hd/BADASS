@@ -6,7 +6,4 @@ RUN apk add --no-cache \
     tcpdump \
     busybox-extras
 
-COPY start.sh /usr/local/bin/start-host
-RUN chmod +x /usr/local/bin/start-host
-
-CMD ["/usr/local/bin/start-host"]
+CMD ["/bin/sh", "-i"]
